@@ -14,24 +14,40 @@ excel_data = file_reader.read_excel('database.xlsx', sheet_name='Hoja1')
 
 print(excel_data)
 
+excel_data = excel_data.sort_values(by='Precio de Pepsi', ascending=True)
+precios_pepsi = excel_data['Precio de Pepsi']
+ventas_pepsi = excel_data['Ventas de Pepsi']
+
+excel_data = excel_data.sort_values(by='Precio de Coca-Cola', ascending=True)
+precios_coca = excel_data['Precio de Coca-Cola']
+ventas_coca = excel_data['Ventas de Coca-Cola']
+
 # Create a visualization
-graph.histplot(
-    data=excel_data['Ventas de Pepsi'],
-    bins=5,
-    label="Ventas de Pepsi",
+
+fig, axes = plot.subplots(nrows=2, ncols=1, figsize=(8, 6))
+
+# Primer subgráfico
+graph.barplot(
+    x=precios_pepsi,
+    y=ventas_pepsi,
+    label="Pepsi",
     color="skyblue",
+    ax=axes[0],
 )
-graph.histplot(
-    data=excel_data['Ventas de Coca-Cola'],
-    bins=5,
-    label="Ventas de Coca-Cola",
+axes[0].set_title('Subgráfico 1')
+
+# Segundo subgráfico
+graph.barplot(
+    x=precios_coca,
+    y=ventas_coca,
+    label="Coca-Cola",
     color="salmon",
+    ax=axes[1],
 )
+axes[1].set_title('Subgráfico 2')
 
-plot.title('Histograma de Ventas Pepsi y Coca-Cola')
-plot.xlabel('Cantidad de Ventas')
-plot.ylabel('Frecuencia')
-plot.legend()  # Mostrar leyenda
+# Ajustes de diseño (opcional)
+plot.tight_layout()
 
-# This run the visualization on the screen
+# Mostrar los subgráficos
 plot.show()

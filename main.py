@@ -14,40 +14,48 @@ excel_data = file_reader.read_excel('database.xlsx', sheet_name='Hoja1')
 
 print(excel_data)
 
-excel_data = excel_data.sort_values(by='Precio de Pepsi', ascending=True)
-precios_pepsi = excel_data['Precio de Pepsi']
 ventas_pepsi = excel_data['Ventas de Pepsi']
+precios_pepsi = excel_data['Precio de Pepsi']
 
-excel_data = excel_data.sort_values(by='Precio de Coca-Cola', ascending=True)
+x1 = precios_pepsi
+y1 = ventas_pepsi
+x1_cuadrado = x1 * x1
+y1_cuadrado = y1 * y1
+x1_y1 = x1 * y1
+
 precios_coca = excel_data['Precio de Coca-Cola']
 ventas_coca = excel_data['Ventas de Coca-Cola']
 
+x2 = precios_coca
+y2 = ventas_coca
+x2_cuadrado = x2 * x2
+y2_cuadrado = y2 * y2
+x2_y2 = x2 * y2
+
 # Create a visualization
 
-fig, axes = plot.subplots(nrows=2, ncols=1, figsize=(8, 6))
 
-# Primer subgráfico
-graph.barplot(
-    x=precios_pepsi,
-    y=ventas_pepsi,
-    label="Pepsi",
-    color="skyblue",
-    ax=axes[0],
+# Primer grafico
+graph.lmplot(
+    x="Precio de Pepsi",
+    y="Ventas de Pepsi",
+    data=excel_data,
+    palette="muted",
+    height=5,
+    scatter_kws={"s": 50, "alpha": 1},
+
 )
-axes[0].set_title('Subgráfico 1')
 
-# Segundo subgráfico
-graph.barplot(
-    x=precios_coca,
-    y=ventas_coca,
-    label="Coca-Cola",
-    color="salmon",
-    ax=axes[1],
+# Segundo grafico
+graph.lmplot(
+    x="Precio de Coca-Cola",
+    y="Ventas de Coca-Cola",
+    data=excel_data,
+    palette="muted",
+    height=5,
+    scatter_kws={"s": 50, "alpha": 1},
 )
-axes[1].set_title('Subgráfico 2')
 
-# Ajustes de diseño (opcional)
-plot.tight_layout()
 
 # Mostrar los subgráficos
 plot.show()

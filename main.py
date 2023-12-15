@@ -53,7 +53,7 @@ r = sxy / ((sxx * syy)**(1/2))
 
 media_x = sigma_x1 / n
 media_y = sigma_y1 / n
-desviacion_estandar_x = (sxx / n-1)**(1/2)
+desviacion_estandar_x = (sxx / (n-1))**(1/2)
 
 probabilidad_acumulativa = 0.95
 alfa = 1 - probabilidad_acumulativa
@@ -168,7 +168,7 @@ r2 = sxy2 / ((sxx2 * syy2)**(1/2))
 
 media_x2 = sigma_x2 / n2
 media_y2 = sigma_y2 / n2
-desviacion_estandar_x2 = (sxx2 / n2-1)**(1/2)
+desviacion_estandar_x2 = (sxx2 / (n2-1))**(1/2)
 
 # Caso n>30
 intervalo_confianza_media_inf2 = media_x2 - \
